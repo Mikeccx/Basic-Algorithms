@@ -7,7 +7,7 @@
 
 <body>
     <script>
-        let arr = [3, 2, 1, 1 , 2];
+        let arr = [3, 2, 1, 1, 2];
         let bubleSort = function (arr) {
             //arr 传入的待排序数组
             //冒泡排序的思想：
@@ -19,7 +19,7 @@
             //基本的冒泡排序
             let len = arr.length; //数组长度；
             let temp = 0;
-            for (let i = 0; i < len; i++) {
+            for (let i = 0; i < len-1; i++) {
                 for (let j = 0; j < len - i - 1; j++) {
                     if (arr[j] > arr[j + 1]) {
                         temp = arr[j + 1];
