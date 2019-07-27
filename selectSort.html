@@ -2,35 +2,36 @@
 <html>
 
 <head>
-    <title>bublesort</title>
+    <title>selectSort</title>
 </head>
 
 <body>
     <script>
         let arr = [3, 2, 1, 1, 2];
-        let bubleSort = function (arr) {
+        let selectSort = function (arr) {
             //arr 传入的待排序数组
-            //冒泡排序的思想：
-            //通过遍历数组，比较相邻的数值，交换其顺序。每一趟至少有一个数在其最终的位置。
-            //平均的时间复杂度：O(n^2).最好的情况是顺序是对的只走了一趟时间复杂度O(n，没有任何数值交换顺序。最坏情况倒序时间复杂度：O(n^2)
+            //选择排序的思想：
+            //每次从剩下的数值中选出最大或者最小的数
+            //平均的时间复杂度：O(n^2).最好最坏次数都是一样。
             //空间复杂度：只需借助一个临时变量temp作为变量交换时临时存储所以复杂度：O(1)
-            //稳定性：交换时相等不会交换所以：稳定
+            //稳定性：每次只是寻找最大最小可能交换大小相等的顺序：不稳定
 
-            //基本的冒泡排序
+            //选择排序  从小到大
             let len = arr.length; //数组长度；
-            let temp = 0;
-            for (let i = 0; i < len-1; i++) {
-                for (let j = 0; j < len - i - 1; j++) {
-                    if (arr[j] > arr[j + 1]) {
-                        temp = arr[j + 1];
-                        arr[j + 1] = arr[j];
-                        arr[j] = temp;
+            let temp,minIndex=0; //临时中间变量和最小数下标
+            for (let i = 0; i < len - 1; i++) {
+                for(let j = i ; j < len ; j++){
+                    if( arr[j] < arr[minIndex] ){
+                        minIndex = j;
                     }
-                }
+                } 
+                temp = arr[i];
+                arr[i] = arr [minIndex]
+                arr[minIndex] = temp;
             }
             return arr;
         }
-        console.log(bubleSort(arr));
+        console.log(selectSort(arr));
     </script>
 
 </body>
