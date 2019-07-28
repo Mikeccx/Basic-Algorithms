@@ -1,0 +1,41 @@
+<!Doctype>
+<html>
+
+<head>
+    <title>shellSort</title>
+</head>
+
+<body>
+    <script>
+        let arr = [3, 2, 1, 1, 2];
+        let shellSort = function (arr) {
+            //arr 传入的待排序数组
+            //希尔排序的思路：
+            //希尔排序相当于分多组的希尔排序。将数组按照一个步长分成多组，分别进行插入排序;插入排序对于小规模和基本有序的数据效率极高。
+            //希尔排序则是将数组转换成基本有序的数组，再进行插入排序。
+            //平均的时间复杂度：O(nlogn)。最坏情况与最坏情况O(nlog^2n)
+            //空间复杂度：只需借助一个临时变量temp储存要插入的元素所以复杂度：O(1)
+            //稳定性：每次分组进行插入排序，不同组顺序不同在下一次步长减少时会交换顺序：不稳定
+            //希尔排序  从小到大
+            let len = arr.length; //数组长度;
+            let step = Math.floor(len / 2);
+            while (step >= 1) {
+                let j;
+                let temp  //存储当前要插入的元素
+                for (let i = step; i < len; i++) {   //多组插入排序
+                    temp = arr[i];
+                    for (j = i - step; j >= 0 && arr[j] > temp;) {
+                        arr[j + step] = arr[j];
+                        j = j - step;
+                    }
+                    arr[j + step] = temp;
+                }
+                step = Math.floor(step / 2)  //步长减半向下取整
+            }
+            return arr;
+        }
+        console.log(shellSort(arr));
+    </script>
+</body>
+
+</html>
