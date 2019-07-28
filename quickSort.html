@@ -1,0 +1,51 @@
+<!Doctype>
+<html>
+
+<head>
+    <title>quickSort</title>
+</head>
+
+<body>
+    <script>
+        let arr = [3, 2, 1, 1, 2];
+        //arr传入的待排序数组
+        //快速排序的思路：
+        //快速排序同样分治法的思想。每次用一个基数，将数据分成2部分，大的都在其右边，小的在左边，在对左右部分重复
+        //平均的时间复杂度：O(nlogn)。最好情况为O(nlogn)。最差情况为O(n^2)；最好情况选择的基准数大小比较居中；最差其情况选到最大或者最小
+        //快速排序的前身是归并排序，快速排序是针对归并排序改进其花费额外的空间
+        //空间复杂度：需要额外的一个数组储存每次合并的结果：O(nlogn)
+        //稳定性：稳定
+        //快速排序  从小到大
+        let len = arr.length;
+        let quickSort = function (left, right) {
+            let base = arr[right];  //基准数默认选择最末尾的数
+            let temp;  //交换位置的临时变量
+            let i = left; //记录进来时的左位置
+            let j = right;//记录进来时的游位置
+            if (right === left)
+                return;
+            while (left != right) {
+                while (arr[left] <= base && left < right) { //没发现比基准数大的数就继续前进
+                    left++;
+                }
+                while (arr[right] >= base && left < right) {//没发现比基准数小的数就继续前进
+                    right--;
+                }
+                //交换两数树值
+                temp = arr[right];
+                arr[right] = arr[left];
+                arr[left] = temp;
+            }
+            //两下标相等交换基准数和下标重合的数的值；
+            arr[right] = base;
+            arr[j] = temp;
+            quickSort(i, left - 1);
+            quickSort(left + 1, j);
+
+        }
+        quickSort(0, len - 1)
+        console.log(arr);
+    </script>
+</body>
+
+</html>
