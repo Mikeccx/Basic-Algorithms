@@ -1,0 +1,42 @@
+<!Doctype>
+<html>
+<head>
+    <title>countSort</title>
+</head>
+<body>
+    <script>
+        let arr = [3, 2, 1, 1, 2];
+        let countSort = function (arr,max) {
+            //arr 传入的待排序数组
+            //max表示最大值，一般适合0-x的数
+            //计数排序的思路：
+            //计数排序对于有区间且不大的数据，效率极高。
+            //平均的时间复杂度：O(n+k)。最坏情况与最坏情况都是O(n+k)
+            //空间复杂度：需要额外的一个数组记录大小为数的范围k所以复杂度：O(n+k)
+            //稳定性：稳定
+            //计数排序  从小到大
+            let len = arr.length; //数组长度;
+            let res = new Array(len); //储存最终结果
+            let range = new Array(max); // count表
+            for(let i = 0 ; i <= max; i++){  //将count表全部置0
+                range[i] = 0;
+            }
+            for(let j = 0 ; j <len ; j++){ // 按照数组值来计数
+                range[arr[j]]++;
+            }
+            for(let k = 1 ; k <= max; k++ ){ // 累加
+                  range[k]+=range[k-1];
+            }
+            for(let l = 0 ; l < len ; l++ ){ // 通过计数表确定数的位置
+                if(range[arr[l]] != 0){ //计数为0 不存在
+                 res[range[arr[l]]-1] = arr[l]; //让新数组从0开始
+                 range[arr[l]]--;
+                }
+            }
+              return res;
+        }
+        console.log(countSort(arr,3));
+    </script>
+</body>
+
+</html>
