@@ -1,0 +1,71 @@
+<!Doctype>
+<html>
+
+<head>
+    <title>heapSort</title>
+</head>
+
+<body>
+    <script>
+        let arr = [3,7,2,5,1];
+        //arr传入的待排序数组
+        //堆排序的思路：
+        //堆排序可分为几个步骤，首先建堆（大根堆即父节点大于子节点或者小根堆）然后交换堆顶与最末的值，再次建堆(排除最末的值)
+        //平均的时间复杂度：O(nlogn)。最好情况和最差情况都为O(nlogn)
+        //空间复杂度：O(1);
+        //稳定性：不稳定
+        //堆排序  从小到大
+        let len = arr.length;
+        //第一步：建堆(大根堆)。
+        let buildbigHeap = function (arr) {
+            //i为父节点
+            for (let i = Math.floor(len / 2); i >= 0; i--) {
+                heapify(arr, i, len)
+            }
+        }
+        let heapify = function (arr, i, len) {
+            let lchild = i * 2 + 1;
+            let rchild = i * 2 + 2;
+            let max = arr[i];
+            let large = i;
+            let temp;
+            if (lchild < len && max < arr[lchild]) { //遇到大于根的交换
+                
+                temp = arr[lchild];
+                arr[lchild] = max;
+                arr[i] = temp;
+                max = temp;
+                large = lchild;
+            }
+            if (rchild < len && max < arr[rchild]) { //遇到大于与根的交换
+                
+                temp = arr[rchild];
+                arr[rchild] = max;
+                arr[i] = temp;
+                max = temp;
+                large = rchild;
+            }
+            if( large != i )
+            {
+                for (let j = Math.floor(len / 2); j >= 0; j--) {
+                heapify(arr, large, len)
+            }
+            }
+        }
+        let heapSort = function (arr) {
+            let temp;
+            buildbigHeap(arr);
+            for( let i = len-1; i > 0 ; i-- ){
+                temp = arr[len-1];
+                arr[len-1] = arr[0];
+                arr[0] = temp;
+                heapify(arr, 0, --len) // 从换的位置重排
+            }
+            
+        }
+       heapSort(arr);
+       console.log(arr);
+    </script>
+</body>
+
+</html>
