@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>twoSort</title>
+</head>
+
+<body>
+    <script>
+        let arr = [3, 2, 1, 1, 2];
+        let len = arr.length; //数组长度；
+        //先通过冒泡排序将数组排序好
+        let bubleSort = function (arr) {
+            //arr 传入的待排序数组
+            //二分查找的思路：
+            //二分查找通常是在有序数列上查找，效率很高，查找的复杂读是logn
+            let temp = 0;
+            for (let i = 0; i < len - 1; i++) {
+                for (let j = 0; j < len - i - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        temp = arr[j + 1];
+                        arr[j + 1] = arr[j];
+                        arr[j] = temp;
+                    }
+                }
+            }
+            return arr;
+        }
+        let twoSort = function (arr, key, low, high) {
+            let middle = Math.round((low + high) / 2);
+            if (arr[middle] === key)
+                return true;
+            while (low < high) {
+                middle = (low + high) / 2;
+                if (arr[middle] === key)
+                    return ture;
+                else if (arr[middle] > key) 
+                high = middle;
+                else
+                low = middle;
+            }
+            return false;
+        }
+        bubleSort(arr);
+        console.log(twoSort(arr, 2,0,len))
+
+    </script>
+</body>
+
+</html>
