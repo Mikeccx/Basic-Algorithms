@@ -1,2 +1,2 @@
 # Basic-Algorithms
-This is to partice some basic-algorithms
+This is to partice some basic-algorithms!
