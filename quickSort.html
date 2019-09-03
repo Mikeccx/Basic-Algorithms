@@ -7,7 +7,8 @@
 
 <body>
     <script>
-        let arr = [3, 2, 1, 1, 2];
+        let arr = [14, 3, 15, 7, 2, 76, 11];
+        // let arr = [1,3,2];
         //arr传入的待排序数组
         //快速排序的思路：
         //快速排序同样分治法的思想。每次用一个基数，将数据分成2部分，大的都在其右边，小的在左边，在对左右部分重复
@@ -16,35 +17,37 @@
         //空间复杂度：需要额外的一个数组储存每次合并的结果：O(nlogn)
         //稳定性：稳定
         //快速排序  从小到大
-        let len = arr.length;
-        let quickSort = function (left, right) {
-            let base = arr[right];  //基准数默认选择最末尾的数
-            let temp;  //交换位置的临时变量
-            let i = left; //记录进来时的左位置
-            let j = right;//记录进来时的游位置
-            if (right === left)
-                return;
-            while (left != right) {
-                while (arr[left] <= base && left < right) { //没发现比基准数大的数就继续前进
-                    left++;
-                }
-                while (arr[right] >= base && left < right) {//没发现比基准数小的数就继续前进
-                    right--;
-                }
-                //交换两数树值
-                temp = arr[right];
-                arr[right] = arr[left];
-                arr[left] = temp;
-            }
-            //两下标相等交换基准数和下标重合的数的值；
-            arr[right] = base;
-            arr[j] = temp;
-            quickSort(i, left - 1);
-            quickSort(left + 1, j);
 
-        }
-        quickSort(0, len - 1)
-        console.log(arr);
+        var quickSort = function (arr) {
+
+            if (arr.length <= 1) { return arr; }
+
+            var pivotIndex = Math.floor(arr.length / 2);
+
+            var pivot = arr.splice(pivotIndex, 1)[0];
+
+            var left = [];
+
+            var right = [];
+
+            for (var i = 0; i < arr.length; i++) {
+
+                if (arr[i] < pivot) {
+
+                    left.push(arr[i]);
+
+                } else {
+
+                    right.push(arr[i]);
+
+                }
+
+            }
+
+            return quickSort(left).concat([pivot], quickSort(right));
+
+        };
+        quickSort(arr)
     </script>
 </body>
 
